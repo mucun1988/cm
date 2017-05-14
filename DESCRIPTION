@@ -1,0 +1,10 @@
+Package: cm
+Type: Package
+Title: Basic Tools in R
+Version: 0.1.0
+Author: Cun Matthew Mu
+Maintainer: Cun Matthew Mu <mucun1988@gmail.com>
+Description: Basic Tools in R
+License: What license is it under?
+LazyData: TRUE
+RoxygenNote: 6.0.1
