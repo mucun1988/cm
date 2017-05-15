@@ -4,6 +4,4 @@
 #' @param b: string in back
 #' @return concatenate string
 #' @export
-'%+%' <- function(a, b){
-  paste0(a, b)
-}
+`%+%` <- function(a, b)  paste0(a, b)
