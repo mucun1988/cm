@@ -8,3 +8,4 @@ Description: Basic Tools in R
 License: What license is it under?
 LazyData: TRUE
 RoxygenNote: 6.0.1
+Imports: magrittr
