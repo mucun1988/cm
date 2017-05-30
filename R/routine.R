@@ -23,14 +23,3 @@ fastPOSIXctWrapper <- function(x, from_tz = NULL, to_tz = NULL, required.compone
 }
 
 # fastPOSIXctWrapper("2017-04-29 20:26:11", from_tz = "America/New_York", to_tz = "UTC")
-
-
-## difference btw UTC and New York Time
-xx <- Sys.time()
-yy <- as.character(as.POSIXlt(xx, tz = "UTC" ))%>%
-  substr(1, 19)%>%
-  as.POSIXct(tz = "America/New_York")
-tdff <- round(as.numeric(yy - xx))*60*60  # seconds
-
-
-fastPOSIXct(time, tz = "UTC") + tdff
