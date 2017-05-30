@@ -10,7 +10,7 @@ square <- function(x){
 
 #' An extention of fasttime::fastPOSIXct
 #'
-#' adds flexibity to both input and output timezones
+#' Adds flexibity to both input and output timezones
 #' @param x strig vector to interpret as timestamps
 #' @param from_tz the time zone x lies in
 #' @param the time zone we are converting to
