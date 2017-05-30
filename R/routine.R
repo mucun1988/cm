@@ -8,6 +8,13 @@ square <- function(x){
   return(x^2)
 }
 
+#' An extention of fasttime::fastPOSIXct
+#'
+#' adds flexibity to both input and output timezones
+#' @param x strig vector to interpret as timestamps
+#' @param from_tz the time zone x lies in
+#' @param the time zone we are converting to
+#' @param required.components same as fasttime::fastPOSIXct
 #' @export
 fastPOSIXctWrapper <- function(x, from_tz = NULL, to_tz = NULL, required.components = 3L){
 
@@ -25,12 +32,3 @@ fastPOSIXctWrapper <- function(x, from_tz = NULL, to_tz = NULL, required.compone
 # fastPOSIXctWrapper("2017-04-29 20:26:11", from_tz = "America/New_York", to_tz = "UTC")
 
 
-## difference btw UTC and New York Time
-xx <- Sys.time()
-yy <- as.character(as.POSIXlt(xx, tz = "UTC" ))%>%
-  substr(1, 19)%>%
-  as.POSIXct(tz = "America/New_York")
-tdff <- round(as.numeric(yy - xx))*60*60  # seconds
-
-
-fastPOSIXct(time, tz = "UTC") + tdff
