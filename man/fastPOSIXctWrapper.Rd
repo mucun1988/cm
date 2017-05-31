@@ -17,5 +17,8 @@ fastPOSIXctWrapper(x, from_tz = NULL, to_tz = NULL,
 \item{the}{time zone we are converting to}
 }
 \description{
-adds flexibity to both input and output timezones
+Adds flexibity to both input and output timezones
+}
+\examples{
+fastPOSIXctWrapper("2017-04-29 20:26:11", from_tz = "America/New_York", to_tz = "UTC")
 }

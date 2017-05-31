@@ -15,7 +15,8 @@ square <- function(x){
 #' @param from_tz the time zone x lies in
 #' @param the time zone we are converting to
 #' @param required.components same as fasttime::fastPOSIXct
-#' @example fastPOSIXctWrapper("2017-04-29 20:26:11", from_tz = "America/New_York", to_tz = "UTC")
+#' @examples
+#' fastPOSIXctWrapper("2017-04-29 20:26:11", from_tz = "America/New_York", to_tz = "UTC")
 #' @export
 fastPOSIXctWrapper <- function(x, from_tz = NULL, to_tz = NULL, required.components = 3L){
 
