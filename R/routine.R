@@ -31,4 +31,18 @@ fastPOSIXctWrapper <- function(x, from_tz = NULL, to_tz = NULL, required.compone
 
 }
 
+#' Apply a boolean function to each entry of x
+#'
+#' [f(x_1), f(x_2), ..., f(x_n)]
+#' @param f a boolean function
+#' @param x a numeric vector
+#' @return [(f(x_1), f(x_2), ..., f(x_n))]
+#' @examples
+#' where(function(x) x>0, -2:2)
+#' @export
+where <- function(f, x) {
+  vapply(x, f, logical(1))
+}
+
+
 
