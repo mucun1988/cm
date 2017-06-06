@@ -44,5 +44,25 @@ where <- function(f, x) {
   vapply(x, f, logical(1))
 }
 
+#' CJ.dt CJ on data.table
+#'
+#' @examples
+#' CJ.dt(data.table(X = 1:2), data.table(Y = c('a','b')))
+#' @export
+CJ.dt <- function(X, Y) {
+
+  stopifnot(is.data.table(X), is.data.table(Y))
+
+  X = X[, c(k = 1L, .SD)]%>%
+  setkey(k)
+
+  Y = Y[, c(k = 1L, .SD)]%>%
+  setkey(NULL)
+
+  return( X[Y, allow.cartesian=TRUE][, k := NULL][] )
+
+}
+
+
 
 

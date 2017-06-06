@@ -7,5 +7,14 @@ Maintainer: Cun Matthew Mu <mucun1988@gmail.com>
 Description: Basic Tools in R
 License: What license is it under?
 LazyData: TRUE
+Depends:
+    R (>= 3.2.3),
+    data.table,
+    magrittr
+Imports:
+Suggests:
+    knitr,
+    testthat,
+    readr
 RoxygenNote: 6.0.1
-Imports: magrittr
+VignetteBuilder: knitr
