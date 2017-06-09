@@ -46,6 +46,8 @@ where <- function(f, x) {
 
 #' CJ.dt CJ on data.table
 #'
+#' @param X the first data table
+#' @param Y the second data table
 #' @examples
 #' CJ.dt(data.table(X = 1:2), data.table(Y = c('a','b')))
 #' @export
