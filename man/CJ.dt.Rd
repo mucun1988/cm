@@ -6,6 +6,11 @@
 \usage{
 CJ.dt(X, Y)
 }
+\arguments{
+\item{X}{the first data table}
+
+\item{Y}{the second data table}
+}
 \description{
 CJ.dt CJ on data.table
 }

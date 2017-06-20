@@ -112,5 +112,23 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
   }
 }
 
+#' Split a vector x into a list of n
+#'
+#' This function is pretty useful to use together with parallel computing,
+#' e.g. when using clusterApply
+#'
+#' @examples
+#' split_into_n(1:100,10)
+#' split_into_n(letters[1:20],3)
+#'
+#' @export
+split_into_n <- function(xx, n){
+
+  xx <- unique(xx)
+  max <- length(xx)/n
+  x <- seq_along(xx)
+  return(split(xx, ceiling(x/max)))
+
+}
 
 
