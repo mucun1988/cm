@@ -6,6 +6,11 @@
 \usage{
 split_into_n(xx, n)
 }
+\arguments{
+\item{xx}{a vector to be split}
+
+\item{n}{# of group we want xx to be split into}
+}
 \description{
 This function is pretty useful to use together with parallel computing,
 e.g. when using clusterApply

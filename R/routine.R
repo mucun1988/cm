@@ -117,6 +117,9 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 #' This function is pretty useful to use together with parallel computing,
 #' e.g. when using clusterApply
 #'
+#' @param xx a vector to be split
+#' @param n # of group we want xx to be split into
+#'
 #' @examples
 #' split_into_n(1:100,10)
 #' split_into_n(letters[1:20],3)
