@@ -65,6 +65,20 @@ CJ.dt <- function(X, Y) {
 
 }
 
+#' sample random rows from the data table X
+#'
+#' @param X input data table
+#' @param nrow number of rows to be sampled
+#'
+#' @examples
+#' sample.dt(data.table(num = 1:10, lett = letters[1:10], Lett = LETTERS[1:10]))
+#' @export
+sample.dt <- function(X, nrow = 1, ...){
+
+  return(X[sample(.N, nrow, ...)])
+
+}
+
 #' Multiple plot function
 #'
 #' ggplot objects can be passed in ..., or to plotlist (as a list of ggplot objects)
@@ -133,5 +147,7 @@ split_into_n <- function(xx, n){
   return(split(xx, ceiling(x/max)))
 
 }
+
+
 
 
