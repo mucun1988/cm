@@ -1,0 +1,11 @@
+starting worker for localhost:11777 
+Type: EXEC 
+this is the 6-th part in creating json files for dt. 
+
+Loading required package: data.table
+Loading required package: magrittr
+TType: DONE Warning messages:
+1: package 'snow' was built under R version 3.3.2 
+2: package 'data.table' was built under R version 3.3.2 
+3: package 'magrittr' was built under R version 3.3.3 
+

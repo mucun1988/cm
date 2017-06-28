@@ -162,14 +162,16 @@ split_into_n <- function(xx, n){
 #' @export
 save_json <- function(dt, out_folder = 'out/', json_file_name = 'file', nt = 5){
 
+  message("dt is stored at ", paste0(out_folder, "dt.rds"), ',\n')
   # save as rds, so that we can parallel
   saveRDS(dt, paste0(out_folder, "dt.rds"))
 
   out_json_file <- paste0(out_folder, json_file_name)
 
-  cl<-snow::makeCluster(nt, type="SOCK", outfile = paste0('out/creat_json.txt'))
+  cl<-snow::makeCluster(nt, type="SOCK", outfile = paste0(out_folder, 'creat_json.txt'))
   snow::clusterMap(cl, create_json_single, idx = split_into_n(seq_len(dim(dt)[1]), nt),
-                   cnt = 1:nt, out_json_file = out_json_file, in_file = paste0(out_folder, "dt.rds"))
+                   cnt = 1:nt, out_json_file = out_json_file,
+                   in_file = paste0(out_folder, "dt.rds"))
   stopCluster(cl)
 
 }
