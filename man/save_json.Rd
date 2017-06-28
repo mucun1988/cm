@@ -20,6 +20,6 @@ Save dt into several json files
 }
 \examples{
 dt <- data.table(num = 1:26, lett = letters, LETT = LETTERS)
-save_json(dt, json_file_name = 'test', nt = 3)
+cm::save_json(dt, json_file_name = 'test', nt = 3)
 jsonlite::read_json('out/file_2.json', simplifyVector = TRUE)
 }

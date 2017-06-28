@@ -157,21 +157,21 @@ split_into_n <- function(xx, n){
 #'
 #' @examples
 #' dt <- data.table(num = 1:26, lett = letters, LETT = LETTERS)
-#' save_json(dt, json_file_name = 'test', nt = 3)
+#' cm::save_json(dt, json_file_name = 'test', nt = 3)
 #' jsonlite::read_json('out/file_2.json', simplifyVector = TRUE)
 #' @export
 save_json <- function(dt, out_folder = 'out/', json_file_name = 'file', nt = 5){
 
-  message("dt is stored at ", paste0(out_folder, "dt.rds"), ',\n')
   # save as rds, so that we can parallel
+  message("dt is stored at ", paste0(getwd(), '/', out_folder, "dt.rds"), ',\n')
   saveRDS(dt, paste0(out_folder, "dt.rds"))
 
-  out_json_file <- paste0(out_folder, json_file_name)
+  out_json_file <- paste0(getwd(), '/', out_folder, json_file_name)
 
   cl<-snow::makeCluster(nt, type="SOCK", outfile = paste0(out_folder, 'creat_json.txt'))
   snow::clusterMap(cl, create_json_single, idx = split_into_n(seq_len(dim(dt)[1]), nt),
                    cnt = 1:nt, out_json_file = out_json_file,
-                   in_file = paste0(out_folder, "dt.rds"))
+                   in_file = paste0(getwd(), '/', out_folder, "dt.rds")) #paste0(out_folder, "dt.rds"))
   stopCluster(cl)
 
 }
@@ -186,11 +186,9 @@ create_json_single <- function(idx, cnt, out_json_file, in_file){
 
   message('this is the ', cnt, '-th part in creating json files for dt. \n')
 
-  require(data.table)
-  require(magrittr)
+  yy <- readRDS(in_file)
 
-  yy <- readRDS(in_file)%>%
-    .[idx]
+  yy <- yy[idx,]
 
   yy_json <- jsonlite::toJSON(yy, pretty = TRUE)
   writeLines(yy_json, paste0(out_json_file, '_', cnt, '.json'))

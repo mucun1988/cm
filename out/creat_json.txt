@@ -1,13 +1,7 @@
-starting worker for localhost:11777 
+starting worker for localhost:11566 
 Type: EXEC 
-this is the 2-th part in creating json files for dt. 
+this is the 3-th part in creating json files for dt. 
 
-Loading required package: data.table
-Loading required package: magrittr
-Error in unserialize(node$con) : error reading from connection
-Calls: local ... doTryCatch -> recvData -> recvData.SOCKnode -> unserialize
-In addition: Warning messages:
-1: package 'snow' was built under R version 3.3.2 
-2: package 'data.table' was built under R version 3.3.2 
-3: package 'magrittr' was built under R version 3.3.3 
-Execution halted
+Type: DONE 
+Warning message:
+package 'snow' was built under R version 3.3.2 
