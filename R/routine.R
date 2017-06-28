@@ -148,6 +148,52 @@ split_into_n <- function(xx, n){
 
 }
 
+#' Save dt into several json files
+#'
+#' @param dt the input data table
+#' @param out_folder place to put output files
+#' @param json_file_name names of the output json files
+#' @param nt number of threads to use in parallel computing
+#'
+#' @examples
+#' dt <- data.table(num = 1:26, lett = letters, LETT = LETTERS)
+#' save_json(dt, json_file_name = 'test', nt = 3)
+#' jsonlite::read_json('out/file_2.json', simplifyVector = TRUE)
+#' @export
+save_json <- function(dt, out_folder = 'out/', json_file_name = 'file', nt = 5){
 
+  # save as rds, so that we can parallel
+  saveRDS(dt, paste0(out_folder, "dt.rds"))
 
+  out_json_file <- paste0(out_folder, json_file_name)
+
+  cl<-snow::makeCluster(nt, type="SOCK", outfile = paste0('out/creat_json.txt'))
+  snow::clusterMap(cl, create_json_single, idx = split_into_n(seq_len(dim(dt)[1]), nt),
+                   cnt = 1:nt, out_json_file = out_json_file, in_file = paste0(out_folder, "dt.rds"))
+  stopCluster(cl)
+
+}
+
+#' Create json file for one part
+#'
+#' @param idx the rows to be put in this json file
+#' @param cnt specifies the thread number
+#' @param out_json_file names of the output json files
+#' @in_file where to read the rds file
+create_json_single <- function(idx, cnt, out_json_file, in_file){
+
+  message('this is the ', cnt, '-th part in creating json files for dt. \n')
+
+  require(data.table)
+  require(magrittr)
+
+  yy <- readRDS(in_file)%>%
+    .[idx]
+
+  yy_json <- jsonlite::toJSON(yy, pretty = TRUE)
+  writeLines(yy_json, paste0(out_json_file, '_', cnt, '.json'))
+
+  return(NULL)
+
+}
 

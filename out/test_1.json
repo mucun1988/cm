@@ -1,0 +1,42 @@
+[
+  {
+    "num": 1,
+    "lett": "a",
+    "LETT": "A"
+  },
+  {
+    "num": 2,
+    "lett": "b",
+    "LETT": "B"
+  },
+  {
+    "num": 3,
+    "lett": "c",
+    "LETT": "C"
+  },
+  {
+    "num": 4,
+    "lett": "d",
+    "LETT": "D"
+  },
+  {
+    "num": 5,
+    "lett": "e",
+    "LETT": "E"
+  },
+  {
+    "num": 6,
+    "lett": "f",
+    "LETT": "F"
+  },
+  {
+    "num": 7,
+    "lett": "g",
+    "LETT": "G"
+  },
+  {
+    "num": 8,
+    "lett": "h",
+    "LETT": "H"
+  }
+]

@@ -10,7 +10,9 @@ LazyData: TRUE
 Depends:
     R (>= 3.2.3),
     data.table,
-    magrittr
+    magrittr,
+    snow,
+    jsonlite
 Imports:
 Suggests:
     knitr,
