@@ -204,10 +204,10 @@ create_json_single <- function(idx, cnt, out_json_file, in_file){
 #' find the final retired id and active id after infinity step
 #'
 #' @examples
-#' map_one_step <- data.table(retired_id = c('A','B','C', 'E'), active_id = c('B','C','D','F'))
-#' map_infty_step <- find_map_infty_step(map_one_step)
+#' one_step_map <- data.table(retired_id = c('A','B','C', 'E'), active_id = c('B','C','D','F'))
+#' map_infty_step <- find_infty_step_map(one_step_map)
 #' @export
-find_map_infty_step <- function(map_one_step){
+find_infty_step_map <- function(map_one_step){
 
   xx <- map_one_step[retired_id != active_id]
   map_n_step <- xx[, .(from = retired_id, to_p = 'ZzZzZzZ', to = active_id)]
