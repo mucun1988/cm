@@ -212,6 +212,7 @@ find_infty_step_map <- function(map_one_step){
   xx <- map_one_step[retired_id != active_id]
   map_n_step <- xx[, .(from = retired_id, to_p = 'ZzZzZzZ', to = active_id)]
   map_n_step[, done:=ifelse(to == to_p, 1, 0)]
+  map_n_step[, step:= 1]
   ratio <- map_n_step[, sum(done)]/dim(map_n_step)[1]
   ratio_p <- -1
 
@@ -222,7 +223,10 @@ find_infty_step_map <- function(map_one_step){
     map_n_step[done == 0, to:=plyr::mapvalues(map_n_step[done==0, to], from = xx$retired_id, to = xx$active_id,
                                         warn_missing = FALSE)]
 
-    map_n_step[, done:=ifelse(to == to_p, 1, 0)]
+    map_n_step[, done:=ifelse(to == to_p, 1, 0)] #1: no change
+
+    map_n_step[, step:=step + 1 - done]
+
     ratio <- map_n_step[, sum(done)]/dim(map_n_step)[1]
 
     message('the ratio is ', ratio, '\n')
@@ -238,7 +242,8 @@ find_infty_step_map <- function(map_one_step){
 
   }
 
-  map_infty_step <- map_n_step[, .(retired_id = from, active_id = to, status = done)]
+  map_infty_step <- map_n_step[, .(retired_id = from, active_id = to,
+                                   status = done, step)]
 
   return(map_infty_step)
 
