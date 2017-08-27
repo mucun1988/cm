@@ -1,3 +1,7 @@
+#' @useDynLib your-package-name
+#' @importFrom Rcpp sourceCpp
+NULL
+
 #' Square a number
 #'
 #' Take in any numeric value and square it
@@ -196,4 +200,51 @@ create_json_single <- function(idx, cnt, out_json_file, in_file){
   return(NULL)
 
 }
+
+#' find the final retired id and active id after infinity step
+#'
+#' @examples
+#' map_one_step <- data.table(retired_id = c('A','B','C', 'E'), active_id = c('B','C','D','F'))
+#' map_infty_step <- find_map_infty_step(map_one_step)
+#' @export
+find_map_infty_step <- function(map_one_step){
+
+  xx <- map_one_step[retired_id != active_id]
+  map_n_step <- xx[, .(from = retired_id, to_p = 'ZzZzZzZ', to = active_id)]
+  map_n_step[, done:=ifelse(to == to_p, 1, 0)]
+  ratio <- map_n_step[, sum(done)]/dim(map_n_step)[1]
+  ratio_p <- -1
+
+  while(ratio < 1){
+
+
+    map_n_step[, to_p := to]
+    map_n_step[done == 0, to:=plyr::mapvalues(map_n_step[done==0, to], from = xx$retired_id, to = xx$active_id,
+                                        warn_missing = FALSE)]
+
+    map_n_step[, done:=ifelse(to == to_p, 1, 0)]
+    ratio <- map_n_step[, sum(done)]/dim(map_n_step)[1]
+
+    message('the ratio is ', ratio, '\n')
+
+    if(ratio_p == ratio) {
+
+      message('cycles might exist in the directed graph, \n')
+      break;
+
+    }
+
+    ratio_p <- ratio
+
+  }
+
+  map_infty_step <- map_n_step[, .(retired_id = from, active_id = to, status = done)]
+
+  return(map_infty_step)
+
+}
+
+
+
+
 
